@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/atmospeer
+    username: testuser
+    password: rj7783208232
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+chatgpt:
+  api-key: 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
