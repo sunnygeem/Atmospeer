@@ -122,7 +122,40 @@ app.post('/api/register', (req, res) => {
   externalReq.end();
 });
 
+// 채팅: 메시지 보내기
+app.post('/api/send', (req, res) => {
 
+  const options = {
+      hostname: '192.249.29.76',
+      port: 8080,
+      path: '/send',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+  };
+
+  const externalReq = http.request(options, (externalRes) => {
+      let data = '';
+
+      externalRes.on('data', (chunk) => {
+          data += chunk;
+      });
+
+      externalRes.on('end', () => {
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ responseData: data }));
+      });
+  });
+
+  externalReq.on('error', (error) => {
+      console.error(`External request error: ${error.message}`);
+      res.status(500).json({ error: 'Internal Server Error' });
+  });
+
+  externalReq.write(JSON.stringify(req.body));
+  externalReq.end();
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
