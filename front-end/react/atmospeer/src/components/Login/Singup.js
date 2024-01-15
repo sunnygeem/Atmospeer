@@ -41,21 +41,30 @@ export default function Signup() {
 
     return (
         <div className="Signup">
-            {/* 회원가입 form */}
-            <form onSubmit={onSubmitHandler}>
-                <input name='id' />
-                <input name='pw' />
-                <input name='name' />
-                <input type='submit' value='회원가입' />
-            </form>
-
-            {isSuccess ? (
-      <div>
-        <p>회원가입에 성공했습니다.</p>
-      </div>
-    ) : (
-      <p>{SignupAttemptCount === 0 ? '회원가입' : '회원가입에 실패했습니다.'}</p>
-    )}
+          {/* 회원가입 form */}
+          <form onSubmit={onSubmitHandler}>
+            <div className="form-group">
+              <label htmlFor="id">ID </label>
+              <input type="text" id="id" name="id" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="pw">PASSWORD </label>
+              <input type="password" id="pw" name="pw" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="name">NAME </label>
+              <input type="text" id="name" name="name" />
+            </div>
+            <input type="submit" value="회원가입" />
+          </form>
+    
+          {isSuccess ? (
+            <div>
+              <p>회원가입에 성공했습니다.</p>
+            </div>
+          ) : (
+            <p>{SignupAttemptCount === 0 ? '회원가입' : '회원가입에 실패했습니다.'}</p>
+          )}
         </div>
-    );
+      );
 }
